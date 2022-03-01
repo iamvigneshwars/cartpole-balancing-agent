@@ -135,17 +135,26 @@ def plot(values, moving_avg_period):
     plt.plot(get_moving_average(moving_avg_period, values))
     plt.pause(0.001)
     print("Episode", len(values), "\n", moving_avg_period, "episode moving avg:", moving_avg[-1])
+
+def plot_loss(values):
+    plt.figure(1)
+    plt.clf()
+    plt.title("training loss")
+    plt.xlabel('Episode')
+    plt.ylabel('loss')
+    plt.plot(values)
+    plt.pause(0.001)
  
 
 # To datastructure to store transitions
 Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward', 'mask'))
 
-batch_size = 256
+batch_size = 1024
 gamma = 0.999
 eps_start = 1
 eps_end = 0.01
 eps_decay = 0.001
-target_update = 50
+target_update = 10
 memory_size = 100000
 lr = 0.001
 
@@ -165,6 +174,8 @@ optimizer = optim.Adam(params = policy_net.parameters(), lr=lr)
 def train(num_episodes):
 
     episode_durations = []
+    losses = []
+    running_loss = 0
 
     for episode in range(int(num_episodes)):
         gm.reset()
@@ -204,11 +215,15 @@ def train(num_episodes):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
+                running_loss =+ loss.item() * batch_size
 
             if gm.done:
                 episode_durations.append(timestep)
                 plot(episode_durations, 100)
                 break
+
+        losses.append(running_loss)
+        plot_loss(losses)
 
         # Target network update.
         if episode % target_update == 0:
@@ -220,8 +235,8 @@ def train(num_episodes):
     torch.save(policy_net.state_dict(), 'policy_net.pb')
     print("*****Model Saved*****")
 
-    plt.show()
     gm.close()
+    plt.show()
 
     
 
