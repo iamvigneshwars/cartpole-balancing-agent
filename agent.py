@@ -249,6 +249,7 @@ def play(num_episodes):
         print("*** Game", _ + 1, "***")
         state = env.reset()
         done = False
+        rewards = 0
         for _ in range(100000):
             with torch.no_grad():
                 action = policy_net(torch.tensor(state, device = device)).argmax(dim=0).item()
@@ -256,10 +257,12 @@ def play(num_episodes):
             time.sleep(0.01)
             new_state, reward, done, _ = env.step(action)
             state = new_state
+            rewards += reward
 
             if done == True:
                 env.reset()
                 break
+        print("Score : ", rewards)
 
     env.close()
 
