@@ -32,7 +32,7 @@ python agent.py play 5
 - [pygame] (https://www.pygame.org/)
 
 ## Reference 
-*David Silver [Deep Reinforcement Learning](https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf). ICML conference, 2016.*
+*David Silver. [Deep Reinforcement Learning](https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf). ICML conference, 2016.*
 
 
 
