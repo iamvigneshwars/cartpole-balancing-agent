@@ -23,3 +23,17 @@ python agent.py play 5
 ```
 
 5 is the number of episodes you want the agent to play the game. The episode will terminate when the agent scores 500 points.
+
+## Requirements
+
+- [Python] (https://www.python.org/downloads/) >= 3.7
+- [Pytorch] (https://pytorch.org/) >= 1.3.1
+- [gym] (https://gym.openai.com/)
+- [pygame] (https://www.pygame.org/)
+
+## Reference 
+*David Silver [Deep Reinforcement Learning](https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf). ICML conference, 2016.*
+
+
+
+
