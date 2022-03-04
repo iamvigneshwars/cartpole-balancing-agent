@@ -12,14 +12,14 @@ To train the agent, run the following command.
 (note: If you train the agent, it will overwrite the pretrained model)
 
 ```bash
-python agent.py train 200
+python agent.py --train 200
 ```
 200 is the number of episodes you want the agent to train.
 
 To play the game with the trained agent, run the followig command.
 
 ```bash
-python agent.py play 5
+python agent.py --play 5
 ```
 
 5 is the number of episodes you want the agent to play the game. The episode will terminate when the agent scores 500 points.

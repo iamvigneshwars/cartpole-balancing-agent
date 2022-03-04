@@ -11,6 +11,14 @@ import torch.optim as optim
 import torch.nn.functional as F
 import time
 import sys
+import argparse
+
+parser = argparse.ArgumentParser(description = 'CartPole DQN')
+parser.add_argument('--train', type = int, default = 0, metavar = 'T', 
+        help='number of training episodes')
+parser.add_argument('--play', type = int, default = 0, metavar = 'E',
+        help='number of episodes to play')
+args = parser.parse_args()
 
 
 # DQN Model
@@ -267,8 +275,9 @@ def play(num_episodes):
     env.close()
 
 if __name__ == "__main__":
-    if (len(sys.argv) > 0 and sys.argv[1] == 'train'):
-        train(sys.argv[2])
+    if (args.train):
+        train(args.train)
 
-    if (len(sys.argv) > 0 and sys.argv[1] == 'play'):
-        play(sys.argv[2])
+    if (args.play):
+        play(args.play)
+
